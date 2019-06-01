@@ -1,41 +1,42 @@
-﻿import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import './NavMenu.css';
+﻿import * as React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
-export class NavMenu extends Component {
-  displayName = NavMenu.name
-
-  render() {
-    return (
-      <Navbar inverse fixedTop fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to={'/'}>react_chat</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={'/'} exact>
-              <NavItem>
-                <Glyphicon glyph='home' /> Home
-              </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/counter'}>
-              <NavItem>
-                <Glyphicon glyph='education' /> Counter
-              </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/fetchdata'}>
-              <NavItem>
-                <Glyphicon glyph='th-list' /> Fetch data
-              </NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-  }
+export class NavMenu extends React.Component {
+    render() {
+        return <div>
+            <div className='navbar navbar-inverse navbar-default'>
+                <div className='container-fluid'>
+                    <div className='navbar-header'>
+                        <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+                            <span className='sr-only'>Toggle navigation</span>
+                            <span className='icon-bar'></span>
+                            <span className='icon-bar'></span>
+                            <span className='icon-bar'></span>
+                        </button>
+                        <Link className='navbar-brand' to={ '/' }>React Chat Demo</Link>
+                    </div>
+                    
+                    <div className='navbar-collapse collapse'>
+                        <ul className='nav navbar-nav'>
+                            <li>
+                                <NavLink to={ '/' } exact activeClassName='active'>
+                                    <span className='glyphicon glyphicon-home'></span> Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={ '/counter' } activeClassName='active'>
+                                    <span className='glyphicon glyphicon-education'></span> Counter
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={ '/fetchdata' } activeClassName='active'>
+                                    <span className='glyphicon glyphicon-th-list'></span> Fetch data
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>;
+    }
 }

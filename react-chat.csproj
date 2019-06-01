@@ -21,6 +21,17 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\src\registerServiceWorker.js" />
+    <None Remove="ClientApp\src\registerServiceWorker.js" />
+    <None Remove="ClientApp\src\index.css" />
+    <None Remove="ClientApp\src\index.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientApp\src\css\" />
+    <Folder Include="ClientApp\src\components\home\" />
+    <Folder Include="ClientApp\src\services\" />
+  </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
