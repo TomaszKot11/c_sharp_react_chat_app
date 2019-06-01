@@ -14,14 +14,17 @@ namespace reactchat.Services
             _chatMessages = new List<ChatMessage>();
         }
 
-        public Task AddMessage(ChatMessage message)
+        public void AddMessage(ChatMessage message)
         {
-            throw new NotImplementedException();
+             _chatMessages.Add(message);
+            //throw new NotImplementedException();
+            //return new Task((obj) => { return 1; };);
         }
 
-        public Task<IEnumerable<ChatMessage>> GetTopMessages(int number = 100)
+        public IEnumerable<ChatMessage> GetTopMessages(int number = 100)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return _chatMessages.GetRange(0, number - 1);
         }
     }
 }

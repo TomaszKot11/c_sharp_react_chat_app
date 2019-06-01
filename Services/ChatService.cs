@@ -14,21 +14,22 @@ namespace reactchat.Services
             _repository = repository;
         }
 
-        public async Task<ChatMessage> CreateNewMessage(string senderName, string message)
+        public  ChatMessage CreateNewMessage(string senderName, string message)
         {
             var chatMessage = new ChatMessage(Guid.NewGuid())
             {
                 Sender = senderName,
                 Message = message
             };
-            await _repository.AddMessage(chatMessage);
+
+            _repository.AddMessage(chatMessage);
 
             return chatMessage;
         }
 
-        public async Task<IEnumerable<ChatMessage>> GetAllInitially()
+        public IEnumerable<ChatMessage> GetAllInitially()
         {
-            return await _repository.GetTopMessages();
+            return _repository.GetTopMessages();
         }
     }
 }

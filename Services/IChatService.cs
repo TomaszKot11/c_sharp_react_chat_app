@@ -7,7 +7,7 @@ namespace reactchat.Services
 {
     public interface IChatService
     {
-        Task<IEnumerable<ChatMessage>> GetAllInitially();
-        Task<ChatMessage> CreateNewMessage(string senderName, string message);
+        IEnumerable<ChatMessage> GetAllInitially();
+        ChatMessage CreateNewMessage(string senderName, string message);
     }
 }

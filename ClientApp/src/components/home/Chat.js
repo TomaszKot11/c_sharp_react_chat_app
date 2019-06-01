@@ -14,10 +14,6 @@ export class Chat extends React.Component {
             currentMessage: ''
             };
 
-        for (var i = 0; i < 5; i++) {
-           this.state.messages.map(msg=>console.log(msg));
-        }
-
         let that = this;
         this._chatService = new ChatService((msg) => {
             this.handleOnSocket(that, msg);
@@ -48,7 +44,7 @@ export class Chat extends React.Component {
                 <form className='form-inline' onSubmit={this.onSubmit}>
                     <label className='sr-only' htmlFor='msg'>Amount (in dollars)</label>
                     <div className='input-group col-md-12'>
-                        <button type='button' className='chat-button input-group-addon'>:-)</button>
+
                         <input type='text'
                             value={this.state.currentMessage}
                             onChange={this.handleMessageChange}
@@ -64,11 +60,13 @@ export class Chat extends React.Component {
     }
 
     handleOnInitialMessagesFetched(messages) {
-        this.setState({
-            messages: messages
-        });
+        if(messages != undefined) {
+            this.setState({
+                messages: messages
+            });
 
-        this.scrollDown(this);
+            this.scrollDown(this);
+         }
     }
 
     handleOnSocket(that, message) {

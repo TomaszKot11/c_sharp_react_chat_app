@@ -1,28 +1,29 @@
-﻿import { HubConnection, TransportType, ConsoleLogger, LogLevel, IConnection, IHubConnectionOptions } from 'signalr-client-react';
+﻿import { HubConnectionBuilder, HubConnection, HttpTransportType, LogLevel, IConnection, IHubConnectionOptions } from '@aspnet/signalr';
 
 
 class ChatWebsocketService {
     //private _connection: HubConnection;
 
     constructor() {
-        var transport = TransportType.WebSockets;
-        let logger = new ConsoleLogger(LogLevel.Information);
+        var transport = HttpTransportType.WebSockets;
+        //let logger = new ConsoleLogger(LogLevel.Information);
 
-        let options: IHubConnectionOptions = {
-            transport: transport,
-            logger:logger
+        let options = {
+            transport: transport
+            //logger:logger
         };
-        let url = `http://${document.location.host}/chat`;
+        let url = `http://${document.location.host}/chatter`;
 
         // create Connection
-        this._connection = new HubConnection(
-            url,
-            options);
+        // transport
+        this._connection = new HubConnectionBuilder().withUrl(url, { transport: HttpTransportType.WebSockets }).configureLogging(LogLevel.Information).build();
+          //  url,
+           // options);
         // start connection
         this._connection.start().catch(err => console.error(err, 'red'));
     }
 
-    registerMessageAdded(messageAdded: (msg) => void) {
+    registerMessageAdded(messageAdded) {
         // get nre chat message from the server
         this._connection.on('MessageAdded', (message) => {
             messageAdded(message);
@@ -33,7 +34,7 @@ class ChatWebsocketService {
         this._connection.invoke('AddMessage', message);
     }
 
-    registerUserLoggedOn(userLoggedOn: (user) => void) {
+    registerUserLoggedOn(userLoggedOn) {
         // get new user from the server
         this._connection.on('UserLoggedOn', (user) => {
             userLoggedOn(user);

@@ -17,9 +17,9 @@ namespace reactchat.Hubs
 
         public void AddMessage(string message)
         {
-            ///var chatMessage = _chatService.CreateNewMessage("Juergen", message);
 
-           // Clients.All.InvokeAsync("MessageAdded", chatMessage);
+            var chatMessage = _chatService.CreateNewMessage("Juergen", message);
+            Clients.All.SendAsync("MessageAdded", chatMessage);
         }
     }
 }

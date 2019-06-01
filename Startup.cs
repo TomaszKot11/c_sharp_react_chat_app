@@ -54,7 +54,7 @@ namespace react_chat
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ChatHub>("/chat");
+                routes.MapHub<ChatHub>("/chatter");
             });
 
             app.UseMvc(routes =>

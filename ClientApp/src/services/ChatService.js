@@ -16,15 +16,23 @@ export class ChatService {
         WebsocketService.sendMessage(message);
     }
 
-    fetchInitialMessages(fetchInitialMessagesCallback: (msg) => void) {
+    fetchInitialMessages(fetchInitialMessagesCallback) {
         fetch('api/Chat/InitialMessages')
             .then(response => {
-                console.log(response);
-                response.json();
-
+                //console.log(response);
+                //for(var i =0; i<10; i++)
+                  //  console.log(response);
+                response.json().then(validResponse => {
+                    console.log('witam bardzo serdecznie kolego');
+                    fetchInitialMessagesCallback(validResponse);
+                }).then(objectmy => {
+                    console.log('Error occured!');
+                    console.log(objectmy);
+                });
                })
             .then(data => {
-                fetchInitialMessagesCallback(data);
+                console.log('Error');
+                console.log(data);
             });
     }
 }

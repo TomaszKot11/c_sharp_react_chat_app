@@ -7,7 +7,7 @@ namespace reactchat.Services
 {
     public interface IChatMessageRepository
     {
-       Task AddMessage(ChatMessage message);
-       Task<IEnumerable<ChatMessage>> GetTopMessages(int number = 100);
+       void AddMessage(ChatMessage message);
+       IEnumerable<ChatMessage> GetTopMessages(int number = 100);
     }
 }

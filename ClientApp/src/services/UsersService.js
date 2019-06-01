@@ -4,7 +4,7 @@ import WebsocketService from './WebsocketService'
 
 export class UsersService {
 
-    constructor(socketCallback: (user) => void) {
+    constructor(socketCallback) {
         this._userLoggedOn = socketCallback;
 
         // Chat-Nachrichten vom Server empfangen
@@ -13,7 +13,7 @@ export class UsersService {
         });
     }
 
-    fetchLogedOnUsers(fetchUsersCallback: (msg) => void) {
+    fetchLogedOnUsers(fetchUsersCallback) {
         fetch('api/Chat/LoggedOnUsers')
             .then(response => response.json())
             .then(data => {

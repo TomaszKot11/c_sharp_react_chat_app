@@ -37,31 +37,7 @@ namespace reactchat.Controllers
         [HttpGet("[action]")]
         public IEnumerable<ChatMessage> InitialMessages()
         {
-            // return _chatService.GetAllInitially();
-            return new List<ChatMessage>()
-            {
-               ChatMessageFactory(),
-               ChatMessageFactory(),
-               ChatMessageFactory()
-            };
-        }
-
-        // temporary 
-        private ChatMessage ChatMessageFactory()
-        {
-            String[] sampleMessages = new String[]
-            {
-                "Hello :)",
-                "Bye :)",
-                "What's up?",
-                "Everything ok",
-                "It's beautiful day, isn't it?"
-            };
-
-            ChatMessage chatMessage = new ChatMessage(Guid.NewGuid());
-            chatMessage.Message = sampleMessages[(new Random()).Next(0, sampleMessages.Length)];
-
-            return chatMessage;
+            return _chatService.GetAllInitially();
         }
 
     }
