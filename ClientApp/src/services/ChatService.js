@@ -18,7 +18,11 @@ export class ChatService {
 
     fetchInitialMessages(fetchInitialMessagesCallback: (msg) => void) {
         fetch('api/Chat/InitialMessages')
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                response.json();
+
+               })
             .then(data => {
                 fetchInitialMessagesCallback(data);
             });

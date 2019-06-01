@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using reactchat.Hubs;
+using reactchat.Services;
 
 namespace react_chat
 {
@@ -21,6 +23,9 @@ namespace react_chat
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
+            services.AddTransient<IChatMessageRepository, ChatMessageRepository>();
+            services.AddTransient<IChatService, ChatService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -44,7 +49,13 @@ namespace react_chat
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseSpaStaticFiles();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chat");
+            });
 
             app.UseMvc(routes =>
             {

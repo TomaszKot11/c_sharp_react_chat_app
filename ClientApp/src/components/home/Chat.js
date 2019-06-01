@@ -12,7 +12,12 @@ export class Chat extends React.Component {
         this.state = {
             messages: [],
             currentMessage: ''
-        };
+            };
+
+        for (var i = 0; i < 5; i++) {
+           this.state.messages.map(msg=>console.log(msg));
+        }
+
         let that = this;
         this._chatService = new ChatService((msg) => {
             this.handleOnSocket(that, msg);
