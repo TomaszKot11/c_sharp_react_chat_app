@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using reactchat.Models;
+using System.Linq;
 
 namespace reactchat.Services
 {

@@ -11,5 +11,6 @@ namespace reactchat.Models
         { }
 
         public DbSet<UserDetails> Users { get; set; }
+        public DbSet<ChatMessage> Messages { get; set; }
     }
 }

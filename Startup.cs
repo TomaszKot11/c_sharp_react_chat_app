@@ -33,7 +33,8 @@ namespace react_chat
             services.AddTransient<IChatMessageRepository, ChatMessageRepository>();
             services.AddTransient<IChatService, ChatService>();
 
-            var connection = "Data Source=blogging.db";
+            var connection = "Data Source=chatting.db";
+
             services.AddDbContext<ChattingContext>
                 (options => options.UseSqlite(connection));
 

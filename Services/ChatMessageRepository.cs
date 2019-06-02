@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using reactchat.Models;
+using System.Linq;
 
 namespace reactchat.Services
 {
     public class ChatMessageRepository : IChatMessageRepository
     {
-        private List<ChatMessage> _chatMessages;
+        private readonly ChattingContext _context;
 
-        public ChatMessageRepository()
+        public ChatMessageRepository(ChattingContext context)
         {
-            _chatMessages = new List<ChatMessage>();
+            _context = context;
         }
 
         public void AddMessage(ChatMessage message)
         {
-             _chatMessages.Add(message);
-            //throw new NotImplementedException();
-            //return new Task((obj) => { return 1; };);
+            _context.Add(message);
+            _context.SaveChangesAsync();
         }
 
         public IEnumerable<ChatMessage> GetTopMessages(int number = 100)
         {
-            //throw new NotImplementedException();
-            return _chatMessages.GetRange(0, number - 1);
+            return _context.Messages.Select((arg) => arg).ToList();
         }
     }
 }
