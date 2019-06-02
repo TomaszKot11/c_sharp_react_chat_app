@@ -13,23 +13,19 @@ namespace reactchat.Services
 {
     public class UserService : IUserService
     {
-        private List<UserDetails> _users = new List<UserDetails>
-        {
-            new UserDetails { Id = "1", Name = "test", Password = "test" },
-            new UserDetails { Id = "2", Name = "tomek", Password = "tomek" },
-            new UserDetails { Id = "3", Name = "bartek", Password = "bartek" }
-        };
-
         private readonly AppSettings _appSettings;
+        private readonly ChattingContext _context;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public UserService(IOptions<AppSettings> appSettings, ChattingContext context)
         {
             _appSettings = appSettings.Value;
+            _context = context;
         }
 
         public UserDetails Authenticate(string name, string password)
         {
-            var user = _users.Find((obj) => obj.Name == name && obj.Password == password);
+            var user = _context.Users.SingleOrDefault((obj) => obj.Name == name && obj.Password == password);
+            
 
             // return null if user not found
             if (user == null)
@@ -42,13 +38,16 @@ namespace reactchat.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.UserDetailsId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
+
+            // save the token to the databasex
+            _context.SaveChangesAsync();
 
             // remove password before returning
             user.Password = null;
@@ -59,10 +58,8 @@ namespace reactchat.Services
         public IEnumerable<UserDetails> GetAll()
         {
             // return users without passwords
-            return _users.Select(x => {
-                x.Password = null;
-                return x;
-            });
+            //TODO: do not return the password
+            return _context.Users.Select((arg) => arg).ToList();
         }
     }
 }

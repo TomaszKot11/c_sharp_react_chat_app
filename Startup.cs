@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using reactchat.Helpers;
 using reactchat.Hubs;
 using reactchat.Services;
+using Microsoft.EntityFrameworkCore;
+using reactchat.Models;
 
 namespace react_chat
 {
@@ -30,6 +32,10 @@ namespace react_chat
             services.AddSignalR();
             services.AddTransient<IChatMessageRepository, ChatMessageRepository>();
             services.AddTransient<IChatService, ChatService>();
+
+            var connection = "Data Source=blogging.db";
+            services.AddDbContext<ChattingContext>
+                (options => options.UseSqlite(connection));
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
