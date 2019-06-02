@@ -5,7 +5,7 @@ export class Layout extends React.Component {
         return <div>
             <div className='container-fluid'>
                 {this.props.children}
-            </div>
+                </div>
         </div>;
     }
 }

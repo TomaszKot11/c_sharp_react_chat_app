@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import * as moment from 'moment';
+import { authenticationService } from '../../services/AuthenticationService';
 import { ChatService } from '../../services/ChatService';
 
 export class Chat extends React.Component {
@@ -55,8 +56,9 @@ export class Chat extends React.Component {
                         <button className='chat-button input-group-addon'>Send</button >
                     </div>
                 </form>
-            </div>
-        </div>;
+                </div>
+             <a onClick={this.logout} >Logout</a>
+            </div>;
     }
 
     handleOnInitialMessagesFetched(messages) {
@@ -101,12 +103,18 @@ export class Chat extends React.Component {
     addMessage(that) {
         let currentMessage = that.state.currentMessage;
         let userName = JSON.parse(localStorage.getItem('currentUser')).name;
-
+        
         if (currentMessage.length === 0) {
             return;
         }
         
         this._chatService.addMessage(userName, currentMessage);
+    }
+
+    logout() {
+        authenticationService.logout();
+        // poor 'trick'
+        window.location.reload(); 
     }
 
     focusField(that) {
