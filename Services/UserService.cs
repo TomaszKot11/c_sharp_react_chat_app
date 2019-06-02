@@ -15,7 +15,9 @@ namespace reactchat.Services
     {
         private List<UserDetails> _users = new List<UserDetails>
         {
-            new UserDetails { Id = "1", Name = "test", Password = "test" }
+            new UserDetails { Id = "1", Name = "test", Password = "test" },
+            new UserDetails { Id = "2", Name = "tomek", Password = "tomek" },
+            new UserDetails { Id = "3", Name = "bartek", Password = "bartek" }
         };
 
         private readonly AppSettings _appSettings;
