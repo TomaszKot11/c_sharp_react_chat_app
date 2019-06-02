@@ -13,6 +13,7 @@ using reactchat.Hubs;
 using reactchat.Services;
 using Microsoft.EntityFrameworkCore;
 using reactchat.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace react_chat
 {

@@ -15,6 +15,7 @@ namespace reactchat.Services
     {
         private readonly AppSettings _appSettings;
         private readonly ChattingContext _context;
+        private PasswordService _passwordUtilities = new PasswordService();
 
         public UserService(IOptions<AppSettings> appSettings, ChattingContext context)
         {
@@ -24,8 +25,11 @@ namespace reactchat.Services
 
         public UserDetails Authenticate(string name, string password)
         {
-            var user = _context.Users.SingleOrDefault((obj) => obj.Name == name && obj.Password == password);
-            
+            var user = _context.Users.SingleOrDefault((obj) => obj.Name == name);
+
+            if (!_passwordUtilities.VerifyHashedPassword(user, password))
+                return null;
+
 
             // return null if user not found
             if (user == null)
