@@ -5,5 +5,7 @@ namespace reactchat.Models
     {
         public string Name { get; internal set; }
         public string Id { get; internal set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
     }
 }
