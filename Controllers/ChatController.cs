@@ -15,23 +15,27 @@ namespace reactchat.Controllers
     {
 
         private readonly IChatService _chatService;
+        private readonly IUserService _userService;
 
-        public ChatController(IChatService chatService)
+        public ChatController(IChatService chatService, IUserService userService)
         {
             _chatService = chatService;
+            _userService = userService;
         }
 
 
         [HttpGet("[action]")]
         public IEnumerable<UserDetails> LoggedOnUsers()
         {
-            return new[]
-            {
-                new UserDetails { Id = "1", Name = "Joe" },
-                new UserDetails { Id = "2", Name = "Mary" },
-                new UserDetails { Id = "3", Name = "Pete" },
-                new UserDetails { Id = "4", Name = "Mo" }
-            };
+            return _userService.GetAll();
+          
+            //return new[]
+            ///{
+               // new UserDetails { Id = "1", Name = "Joe" },
+                //new UserDetails { Id = "2", Name = "Mary" },
+                //new UserDetails { Id = "3", Name = "Pete" },
+                //new UserDetails { Id = "4", Name = "Mo" }
+            //};
         }
 
         [HttpGet("[action]")]
@@ -40,5 +44,15 @@ namespace reactchat.Controllers
             return _chatService.GetAllInitially();
         }
 
+        [HttpPost("[action]")]
+        public IActionResult Authenticate([FromBody]UserDetails userParam)
+        {
+            var user = _userService.Authenticate(userParam.Name, userParam.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(user);
+        }
     }
 }

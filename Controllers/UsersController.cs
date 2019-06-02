@@ -11,36 +11,23 @@ using reactchat.Services;
 
 namespace reactchat.Controllers
 {
-      
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
+
+    [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        private readonly IUserService _userService;
+        // private readonly IUserService _userService;
 
-        public UsersController(IUserService userService)
-        {
-            _userService = userService;
-        }
+         //public UsersController(IUserService userService)
+        // {
+         //  _userService = userService;
+        // }
 
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserDetails userParam)
-        {
-            var user = _userService.Authenticate(userParam.Name, userParam.Password);
+    
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+       // [HttpGet("[action]")]
+      //  public IActionResult GetAll()
+      //  {
 
-            return Ok(user);
-        }
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            return Ok(users);
-        }
+        //}
     }
 }

@@ -29,9 +29,9 @@ class ChatWebsocketService {
             messageAdded(message);
         });
     }
-    sendMessage(message) {
+    sendMessage(userName, message) {
         // send the chat message to the server
-        this._connection.invoke('AddMessage', message);
+        this._connection.invoke('AddMessage', userName, message);
     }
 
     registerUserLoggedOn(userLoggedOn) {

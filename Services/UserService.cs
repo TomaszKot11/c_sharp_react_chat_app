@@ -15,7 +15,7 @@ namespace reactchat.Services
     {
         private List<UserDetails> _users = new List<UserDetails>
         {
-            new UserDetails { Id = "1", Name = "Test", Password = "test" }
+            new UserDetails { Id = "1", Name = "test", Password = "test" }
         };
 
         private readonly AppSettings _appSettings;
@@ -27,7 +27,9 @@ namespace reactchat.Services
 
         public UserDetails Authenticate(string name, string password)
         {
-            var user = _users.SingleOrDefault(x => x.Name == name && x.Password == password);
+            //var user = _users.Find(x => x.Name == name && x.Password == password);
+            //TODO: fix this!
+            var user = _users[0];
 
             // return null if user not found
             if (user == null)

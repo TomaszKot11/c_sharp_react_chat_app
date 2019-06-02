@@ -36,6 +36,7 @@
     <Folder Include="Services\" />
     <Folder Include="Hubs\" />
     <Folder Include="Helpers\" />
+    <Folder Include="ClientApp\src\helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\SampleDataController.cs" />

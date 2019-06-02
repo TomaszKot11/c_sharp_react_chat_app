@@ -12,8 +12,8 @@ export class ChatService {
         });
     }
 
-    addMessage(message) {
-        WebsocketService.sendMessage(message);
+    addMessage(userName, message) {
+        WebsocketService.sendMessage(userName, message);
     }
 
     fetchInitialMessages(fetchInitialMessagesCallback) {

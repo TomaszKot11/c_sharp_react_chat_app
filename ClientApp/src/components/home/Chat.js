@@ -100,11 +100,13 @@ export class Chat extends React.Component {
 
     addMessage(that) {
         let currentMessage = that.state.currentMessage;
+        let userName = JSON.parse(localStorage.getItem('currentUser')).name;
+
         if (currentMessage.length === 0) {
             return;
         }
-
-        this._chatService.addMessage(currentMessage);
+        
+        this._chatService.addMessage(userName, currentMessage);
     }
 
     focusField(that) {
