@@ -23,7 +23,6 @@ export class ChatService {
                 //for(var i =0; i<10; i++)
                   //  console.log(response);
                 response.json().then(validResponse => {
-                    console.log('witam bardzo serdecznie kolego');
                     fetchInitialMessagesCallback(validResponse);
                 }).then(objectmy => {
                     console.log('Error occured!');

@@ -18,8 +18,14 @@ class LoginPage extends React.Component {
         return (
             <div>
                 <div className="alert alert-info">
-                    Username: test<br />
-                    Password: test
+                    Username: test<br/>
+                    Password: test <br />
+                    <hr/><br/>
+                    Username: bartek <br/>
+                    Password: bartek <br/>
+                    <hr/><br/>
+                    Username: tomek <br/>
+                    Password: tomek <br/>
                 </div>
                 <h2>Login</h2>
                 <Formik

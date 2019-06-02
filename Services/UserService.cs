@@ -29,9 +29,7 @@ namespace reactchat.Services
 
         public UserDetails Authenticate(string name, string password)
         {
-            //var user = _users.Find(x => x.Name == name && x.Password == password);
-            //TODO: fix this!
-            var user = _users[0];
+            var user = _users.Find((obj) => obj.Name == name && obj.Password == password);
 
             // return null if user not found
             if (user == null)
